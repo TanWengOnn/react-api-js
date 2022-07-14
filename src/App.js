@@ -134,7 +134,7 @@ function App() {
 
 
   return (
-    <div className="body">
+    <div className="container">
       <h1>API Request</h1>
       {/*-------------------Get Request-------------------*/}
       <h2>Get Request</h2>
