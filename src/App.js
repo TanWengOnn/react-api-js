@@ -91,7 +91,7 @@ function App() {
         console.log(response.status);
       })
       .catch((error) => {
-        setPatch(" ");
+        setDelete(" ");
         setDeleteStatus(`${error.response.status} (${error.message})`);
         console.log(error);
       });
@@ -134,43 +134,58 @@ function App() {
 
 
   return (
-    <div className="container">
-      <h1>API Request</h1>
-      {/*-------------------Get Request-------------------*/}
-      <h2>Get Request</h2>
-      <input onChange={handleGet}/>
-      <button onClick={getComment}>Get Comment</button> 
-      <div>
-        <Output postId={get.postId} id={get.id} name={get.name} email={get.email} body={get.body} status={getStatus}/>
+    <div>
+      <h1 className="header">API Request</h1>
+      <div className="container">
+        
+        {/*-------------------Get Request-------------------*/}
+        <div className="get_container">
+          <h2>Get Request</h2>
+          <input onChange={handleGet}/>
+          <button onClick={getComment}>Get Comment</button> 
+          <div>
+            <Output postId={get.postId} id={get.id} name={get.name} email={get.email} body={get.body} status={getStatus}/>
+          </div>
+        </div>
+
+        {/*-------------------Post Request-------------------*/}
+        <div className="post_container">
+          <h2>Post Request</h2>
+          <input placeholder="name" onChange={handlePostName}/> <br/>
+          <input placeholder="email" onChange={handlePostEmail}/> <br/>
+          <input placeholder="body" onChange={handlePostBody}/> <br/>
+          <button onClick={createComment}>Post Comment</button>
+            <div>
+              <Output postId={post ? post.postId : ""} id={post ? post.id : ""} name={post ? post.name : ""} email={post ? post.email : ""} body={post ? post.body : ""} status={postStatus}/>
+            </div>
+        </div>
+        
+        {/*-------------------Patch Request-------------------*/}
+        <div className="patch_container">
+          <h2>Patch Request</h2>
+          <input placeholder="id" onChange={handlePatch}/> <br/>
+          <input placeholder="name" onChange={handlePatchName}/> <br/>
+          <input placeholder="email" onChange={handlePatchEmail}/> <br/>
+          <input placeholder="body" onChange={handlePatchBody}/> <br/>
+          <button onClick={patchComment}>Patch Comment</button>
+            <div>
+              <Output postId={patch ? patch.postId : ""} id={patch ? patch.id : ""} name={patch ? patch.name : ""} email={patch ? patch.email : ""} body={patch ? patch.body : ""} status={patchStatus}/>
+            </div>
+        </div>
+        
+        {/*-------------------Delete Request-------------------*/}
+        <div className="delete_container">
+          <h2>Delete Request</h2>
+          <input onChange={handleDelete}/>
+          <button onClick={deleteComment}>Delete Comment</button>
+            <div>
+              <p><b>Request Status: {deleteStatus}</b></p>
+            </div>
+        </div>
+        
       </div>
-      
-      {/*-------------------Post Request-------------------*/}
-      <h2>Post Request</h2>
-      <input placeholder="name" onChange={handlePostName}/> <br/>
-      <input placeholder="email" onChange={handlePostEmail}/> <br/>
-      <input placeholder="body" onChange={handlePostBody}/> <br/>
-      <button onClick={createComment}>Post Comment</button>
-        <div>
-          <Output postId={post ? post.postId : ""} id={post ? post.id : ""} name={post ? post.name : ""} email={post ? post.email : ""} body={post ? post.body : ""} status={postStatus}/>
-        </div>
-      {/*-------------------Patch Request-------------------*/}
-      <h2>Patch Request</h2>
-      <input placeholder="id" onChange={handlePatch}/> <br/>
-      <input placeholder="name" onChange={handlePatchName}/> <br/>
-      <input placeholder="email" onChange={handlePatchEmail}/> <br/>
-      <input placeholder="body" onChange={handlePatchBody}/> <br/>
-      <button onClick={patchComment}>Patch Comment</button>
-        <div>
-          <Output postId={patch ? patch.postId : ""} id={patch ? patch.id : ""} name={patch ? patch.name : ""} email={patch ? patch.email : ""} body={patch ? patch.body : ""} status={patchStatus}/>
-        </div>
-      {/*-------------------Delete Request-------------------*/}
-      <h2>Delete Request</h2>
-      <input onChange={handleDelete}/>
-      <button onClick={deleteComment}>Delete Comment</button>
-        <div>
-          <p><b>Request Status: {deleteStatus}</b></p>
-        </div>
     </div>
+    
   );
 }
 
